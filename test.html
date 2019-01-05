@@ -7,23 +7,66 @@
   <title>Todo List</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <script type="text/javascript" src="eventListener.js"></script>
-  <script type="text/javascript" src="logicProcess.js"></script>
-  <script type="text/javascript" src="dataInteract.js"></script>
-  <script type="text/javascript" src="todo.js"></script>
+  <script>
+    localStorage.clear();
+    function addTodoListener() {
+      return toAddTodo();
+    }
+    function toAddTodo() {
+      let todo = generateNewTodo();
+      if (todo) {
+        return addTodo(todo);
+      }
+      return;
+    }
+
+    function generateNewTodo() {
+      let content = document.getElementById('input').value;
+      if (content.length) {
+        let status = 'active';
+        let id = new Date();
+        return new Todo(content, status, id);
+      }
+      return;
+    }
+
+    function addTodo(todo) {
+      let todos = localStorage.getItem('todos');
+      todos = JSON.parse(todos);
+      if (!todos) {
+        todos = [];
+      }
+      todos.push(todo);
+      todos = JSON.stringify(todos)
+      localStorage.setItem('todos',todos)
+    }
+
+
+
+    class Todo {
+      constructor(content, status, id) {
+        this.content = content;
+        this.status = status;
+        this.id = id;
+      }
+    }
+
+
+  </script>
+
 </head>
 
 <body>
   <div id="total">
     <header>Todo List</header>
-    <div id="addTodo">
-      <input type="text" id="inputBox" placeholder="请输入" />
+    <div id="add_todo">
+      <input type="text" id="input" placeholder="请输入" />
       <button type="submit" onclick="addTodoListener()">添加</button>
     </div>
     <div id="main">
       <!-- <table id="todo_table">
         <tbody> -->
-      <ul id="todoList">
+      <ul id="todo_list">
         <li>123<span>x</span></li>
         <li>456<span>x</span></li>
         <li>789<span>x</span></li>
@@ -36,15 +79,15 @@
       <!-- </tbody>
       </table> -->
     </div>
-    <div id="footButtons">
-      <span id="leftItems">leftiems:3</span>
+    <div id="foot_buttons">
+      <span id="left_items">leftiems:3</span>
       <input type="button" value="ALL" onclick="buttonAllListener()">
       <input type="button" value="ACTIVE" onclick="buttonActiveListener()">
       <input type="button" value="COMPLETE" onclick="buttonCompleteListener()">
       <input type="button" value="clear Completed" onclick="clearCompletedListener()">
     </div>
   </div>
-  <p id="test">1</p>
+  <p id="test">123</p>
 </body>
 
 </html>

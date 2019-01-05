@@ -17,18 +17,18 @@ header {
   padding:10px 0;
 }
 
-#add_todo, #main, #foot_buttons {
+#addTodo, #main, #footButtons {
   width: 80%;
   margin: 5px auto;
 }
 
-#add_todo input {
+#addTodo input {
   width: 85%;
   padding: 5px;
   margin:5px;
 }
 
-#add_todo button{
+#addTodo button{
   display: inline-block;
   margin: 5px;
   padding: 3px 5px;
@@ -41,13 +41,13 @@ header {
   float: right;
 }
 
-#left_items {
+#leftItems {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 20px;
 }
 
-#foot_buttons input {
+#footButtons input {
   display: inline-block;
   padding: 5px 10px;
   margin: 10px 20px;
