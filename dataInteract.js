@@ -21,3 +21,8 @@ function addTodo(todo) {
   todos = JSON.stringify(todos)
   localStorage.setItem('todos', todos)
 }
+
+// function getCompletedTodos() {
+//   let todos = localStorage.getItem('todos');
+
+// }

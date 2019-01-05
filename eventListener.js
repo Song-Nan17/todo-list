@@ -4,5 +4,7 @@ function addTodoListener() {
 }
 
 function buttonCompleteListener() {
-  return 0;
+  changeCompletedButtonColor();
+  // toDisplayCompletedTodos()
+  return 1;
 }
