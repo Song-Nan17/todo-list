@@ -1,0 +1,54 @@
+body {
+  background-color: white;
+  width: 95%;
+  margin: 0 auto;
+  color: black;
+}
+#total {
+  background-color: antiquewhite;
+  width: 70%;
+  margin: 0 auto;
+}
+
+header {
+  font-family: fantasy;
+  font-size: 30px;
+  text-align: center;
+  padding:10px 0;
+}
+
+#add_todo, #main, #foot_buttons {
+  width: 80%;
+  margin: 5px auto;
+}
+
+#add_todo input {
+  width: 85%;
+  padding: 5px;
+  margin:5px;
+}
+
+#add_todo button{
+  display: inline-block;
+  margin: 5px;
+  padding: 3px 5px;
+}
+
+#main li {
+  width: 90%;
+}
+#main span {
+  float: right;
+}
+
+#left_items {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#foot_buttons input {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 10px 20px;
+}
