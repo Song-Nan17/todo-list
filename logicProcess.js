@@ -1,23 +1,41 @@
-function toAddTodo() {
-  let todo = generateNewTodo();
-  if (todo) {
-    return addTodo(todo);
+
+let generateNewTodo = () => {
+  let content = getInputContent();
+  if (!content.length) {
+    return;
   }
-  return;
+  let status = getStatus();
+  if (!status) {
+    status = 'active';
+  }
+  let id = new Date();
+  return new Todo(content, status, id);
 }
 
-function clearInputBox() {
-  let input = document.getElementById('inputBox');
-  input.value = '';
+let addTodo = todo => {
+  if (!todo) {
+    return;
+  }
+  let todos = getTodos();
+  todos = JSON.parse(todos);
+  if (!todos) {
+    todos = [];
+  }
+  todos.push(todo);
+  todos = JSON.stringify(todos);
+  setTodos(todos);
 }
 
-function changeCompletedButtonColor() {
+let changeButtonCompletedColor = () => {
   document.getElementById('completed').style.background = 'pink';
   document.getElementById('all').style.background = '';
   document.getElementById('active').style.background = '';
 }
 
-// function toDisplayCompletedTodos() {
-// getCompletedTodos()
-//   displayCompletedTodos();
-// }
+let changeButtonAllColor = () => {
+  document.getElementById('completed').style.background = '';
+  document.getElementById('all').style.background = 'pink';
+  document.getElementById('active').style.background = '';
+}
+
+// let displayCompletedTodos = () =>

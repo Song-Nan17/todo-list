@@ -1,28 +1,12 @@
-function generateNewTodo() {
-  let content = document.getElementById('inputBox').value;
-  if (content.length) {
-    let status = 'active';
-    if (buttonCompleteListener() === 1) {
-      status = 'completed';
-    }
-    let id = new Date();
-    return new Todo(content, status, id);
-  }
-  return;
+let getInputContent = () => document.getElementById('inputBox').value;
+let getStatus = () => localStorage.getItem('status');
+let getTodos = () => localStorage.getItem('todos');
+let setTodos = todos => localStorage.setItem('todos', todos);
+let clearInputBox = () => {
+  let input = document.getElementById('inputBox');
+  input.value = '';
 }
 
-function addTodo(todo) {
-  let todos = localStorage.getItem('todos');
-  todos = JSON.parse(todos);
-  if (!todos) {
-    todos = [];
-  }
-  todos.push(todo);
-  todos = JSON.stringify(todos)
-  localStorage.setItem('todos', todos)
-}
+let setStatus = () => localStorage.setItem('status', 'completed');
 
-// function getCompletedTodos() {
-//   let todos = localStorage.getItem('todos');
-
-// }
+let deleteStatus = () => localStorage.removeItem('status');

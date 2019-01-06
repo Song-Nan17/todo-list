@@ -10,47 +10,57 @@
   <script>
     localStorage.clear();
     function addTodoListener() {
-      return toAddTodo();
-    }
-    function toAddTodo() {
-      let todo = generateNewTodo();
-      if (todo) {
-        return addTodo(todo);
-      }
-      return;
-    }
+  let todo = generateNewTodo();
+  addTodo(todo);
+  clearInputBox();
+}
 
-    function generateNewTodo() {
-      let content = document.getElementById('input').value;
-      if (content.length) {
-        let status = 'active';
-        let id = new Date();
-        return new Todo(content, status, id);
-      }
-      return;
-    }
+let generateNewTodo = () => {
+  let content = getInputContent();
+  if (!content.length) {
+    return;
+  }
+  let status = getStatus();
+  if (!status) {
+    status = 'active';
+  }
+  let id = new Date();
+  return new Todo(content, status, id);
+}
 
-    function addTodo(todo) {
-      let todos = localStorage.getItem('todos');
-      todos = JSON.parse(todos);
-      if (!todos) {
-        todos = [];
-      }
-      todos.push(todo);
-      todos = JSON.stringify(todos)
-      localStorage.setItem('todos',todos)
-    }
+let addTodo = todo => {
+  if (!todo) {
+    return;
+  }
+  let todos = getTodos();
+  todos = JSON.parse(todos);
+  if (!todos) {
+    todos = [];
+  }
+  todos.push(todo);
+  todos = JSON.stringify(todos)
+  alert(todos);
+  setTodos(todos);
+}
 
+function clearInputBox() {
+  let input = document.getElementById('inputBox');
+  input.value = '';
+}
 
+let getInputContent = () => document.getElementById('inputBox').value;
+let getStatus = () => localStorage.getItem('status');
+let getTodos = () => localStorage.getItem('todos');
+let setTodos = todos => localStorage.setItem('todos', todos);
+let setStatus = () => localStorage.setItem('status', 'completed');
 
-    class Todo {
-      constructor(content, status, id) {
-        this.content = content;
-        this.status = status;
-        this.id = id;
-      }
-    }
-
+class Todo {
+  constructor(content, status, id) {
+    this.content = content;
+    this.status = status;
+    this.id = id;
+  }
+}
 
   </script>
 
@@ -59,14 +69,14 @@
 <body>
   <div id="total">
     <header>Todo List</header>
-    <div id="add_todo">
-      <input type="text" id="input" placeholder="请输入" />
+    <div id="addTodo">
+      <input type="text" id="inputBox" placeholder="请输入" />
       <button type="submit" onclick="addTodoListener()">添加</button>
     </div>
     <div id="main">
       <!-- <table id="todo_table">
         <tbody> -->
-      <ul id="todo_list">
+      <ul id="todoList">
         <li>123<span>x</span></li>
         <li>456<span>x</span></li>
         <li>789<span>x</span></li>
@@ -79,15 +89,15 @@
       <!-- </tbody>
       </table> -->
     </div>
-    <div id="foot_buttons">
-      <span id="left_items">leftiems:3</span>
-      <input type="button" value="ALL" onclick="buttonAllListener()">
-      <input type="button" value="ACTIVE" onclick="buttonActiveListener()">
-      <input type="button" value="COMPLETE" onclick="buttonCompleteListener()">
-      <input type="button" value="clear Completed" onclick="clearCompletedListener()">
+    <div id="footButtons">
+      <span id="leftItems">leftiems:3</span>
+      <input type="button" id="all" value="ALL" onclick="buttonAllListener()">
+      <input type="button" id="active" value="ACTIVE" onclick="buttonActiveListener()">
+      <input type="button" id="completed" value="COMPLETE" onclick="buttonCompleteListener()">
+      <input type="button" id="clearCompleted" value="clear Completed" onclick="clearCompletedListener()">
     </div>
   </div>
-  <p id="test">123</p>
+  <p id="test">1</p>
 </body>
 
 </html>
