@@ -1,28 +1,38 @@
 // localStorage.clear();
 
+
+
+
+let initializeDisplay=()=>{
+  displayTodosOf('all');
+
+  displayLeftItemsOfTodos('all');
+
+}
+
 let addTodoListener = () => {
   let todo = generateNewTodo();
   addTodo(todo);
   clearInputBox();
-  refreshTodos();
+  refreshTodosDisplay();
 }
 
 let buttonAllListener = () => {
   setButtonStatusTo('all');
   changeButtonAllColor();
-  displayAllTodos();
+  displayTodosOf('all');
   displayLeftItemsOfTodos('all');
 }
 
 let buttonActiveListener=()=>{
   setButtonStatusTo('active');
   changeButtonActiveColor();
-  displayActiveTodos();
+  displayTodosOf('active');
   displayLeftItemsOfTodos('active')
 }
 let buttonCompleteListener = () => {
   setButtonStatusTo('completed');
   changeButtonCompletedColor();
-  displayCompletedTodos();
+  displayTodosOf('completed');
   displayLeftItemsOfTodos('completed');
 }

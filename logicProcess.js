@@ -1,14 +1,16 @@
 
+
 let generateNewTodo = () => {
   let content = getInputContent();
   if (!content.length) {
     return;
   }
   let status = 'active';
+  let id = new Date();
   if (getButtonStatus() === 'completed') {
     status = 'completed';
+    // setNewAddTodoId(id);
   }
-  let id = new Date();
   return new Todo(content, status, id);
 }
 
@@ -23,17 +25,20 @@ let addTodo = todo => {
   todos.push(todo);
   setTodos(todos);
 }
-let refreshTodos = () => {
+let refreshTodosDisplay = () => {
   let ButtonStatus = getButtonStatus();
   switch (ButtonStatus) {
     case 'all':
-      displayAllTodos();
+      displayTodosOf('all');
+      displayLeftItemsOfTodos('all');
       break;
-    case 'actice':
-      displayActiveTodos();
+    case 'active':
+      displayTodosOf('active');
+      displayLeftItemsOfTodos('active');
       break;
     case 'completed':
-      displayCompletedTodos();
+      noDisplayNewAddTodo();
+      displayLeftItemsOfTodos('completed');
       break;
   }
 }
@@ -44,9 +49,19 @@ let changeButtonAllColor = () => {
   document.getElementById('active').style.background = '';
 }
 
-let displayAllTodos = () => {
+let displayTodosOf = status => {
   let todos = getTodos();
-  displayLiTags(todos);
+  let displayTodos = todos;
+  if (status !== 'all' && todos) {
+    displayTodos = getTodosIsClass(status, todos);
+  }
+  // if(status==='completed'&&displayTodos) {
+  //    displayTodos = deleteNewAddTodo(displayTodos);
+  //    alert(displayTodos)
+  // }
+  if (displayTodos) {
+    displayLiTags(displayTodos);
+  }
 }
 
 let changeButtonActiveColor = () => {
@@ -55,10 +70,11 @@ let changeButtonActiveColor = () => {
   document.getElementById('active').style.background = 'pink';
 }
 
-let displayActiveTodos = () => {
-  let activeTodos = getTodosIsClass('active');
-  displayLiTags(activeTodos);
-}
+// let displayActiveTodos = () => {
+//   let todos = getTodos();
+//   let activeTodos = getTodosIsClass('active', todos);
+//   displayLiTags(activeTodos);
+// }
 
 let changeButtonCompletedColor = () => {
   document.getElementById('completed').style.background = 'pink';
@@ -67,12 +83,40 @@ let changeButtonCompletedColor = () => {
 }
 
 
-let displayCompletedTodos = () => {
-  let completedTodos = getTodosIsClass('completed');
-  displayLiTags(completedTodos);
-}
+// let displayCompletedTodos = () => {
+//   let todos = getTodos();
+//   let completedTodos = getTodosIsClass('completed', todos);
+//   displayLiTags(completedTodos);
+// }
 
-let displayLiTags = (todos) => {
+let displayLiTags = todos => {
   let liTags = getLiTags(todos);
   document.getElementById('todoList').innerHTML = liTags.join('\n');
+}
+
+let displayLeftItemsOfTodos = status => {
+  let todos = getTodos();
+  if (status !== 'all' && todos) {
+    todos = getTodosIsClass(status, todos);
+  }
+  let leftItems = 0;
+  if (todos) {
+    leftItems = todos.length;
+  }
+  document.getElementById('leftItems').innerHTML = `Left items:${leftItems}`
+  setLeftItems(leftItems);
+}
+
+let noDisplayNewAddTodo = () => {
+  let todos = getTodos();
+  if (!todos) {
+    return;
+  }
+  let completedTodos = getTodosIsClass('completed', todos);
+  if (completedTodos.length <= 1) {
+    return;
+  }
+  let displayTodos = completedTodos.slice(0, completedTodos.length - 1);
+  displayLiTags(displayTodos);
+
 }

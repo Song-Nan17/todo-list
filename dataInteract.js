@@ -13,15 +13,19 @@ let clearInputBox = () => {
 }
 
 let getButtonStatus = () => localStorage.getItem('buttonStatus');
-let setButtonStatusTo = (status) => localStorage.setItem('buttonStatus', status);
+let setButtonStatusTo = status => localStorage.setItem('buttonStatus', status);
+let setNewAddTodoId = id => localStorage.setItem('newTodoId', id)
 
-
-let getTodosIsClass = status => {
-  let todos = getTodos();
-  return todos.filter(todo => todo.status === status);; 
+let getTodosIsClass = (status, todos) => {
+  return todos.filter(todo => todo.status === status);
 }
-let getLiTags = completedTodos => completedTodos.map(todo =>
+
+
+
+let getLiTags = todos => todos.map(todo =>
   `<li class ="${todo.status}">${todo.content}<span>x</span></li>`);
+
+let setLeftItems = leftItems => localStorage.setItem('leftItems', leftItems);
 
 
   // let todos = localStorage.getItem('todos');

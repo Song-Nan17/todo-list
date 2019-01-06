@@ -13,7 +13,7 @@
   <script type="text/javascript" src="todo.js"></script>
 </head>
 
-<body>
+<body onload="initializeDisplay()">
   <div id="total">
     <header>Todo List</header>
     <div id="addTodo">
@@ -24,20 +24,20 @@
       <!-- <table id="todo_table">
         <tbody> -->
       <ul id="todoList">
-        <li>123<span>x</span></li>
+        <!-- <li>123<span>x</span></li>
         <li>456<span>x</span></li>
         <li>789<span>x</span></li>
         <li>789<span>x</span></li>
         <li>789<span>x</span></li>
         <li>789<span>x</span></li>
         <li>789<span>x</span></li>
-        <li>789<span>x</span></li>
+        <li>789<span>x</span></li> -->
       </ul>
       <!-- </tbody>
       </table> -->
     </div>
     <div id="footButtons">
-      <span id="leftItems">leftiems:3</span>
+      <span id="leftItems">left</span>
       <input type="button" id="all" value="ALL" onclick="buttonAllListener()">
       <input type="button" id="active" value="ACTIVE" onclick="buttonActiveListener()">
       <input type="button" id="completed" value="COMPLETE" onclick="buttonCompleteListener()">
