@@ -38,6 +38,10 @@ header {
   list-style-type: circle;
 }
 
+#todoList li:hover span {
+visibility: visible;
+}
+
 #todoList .completed {
   list-style-type: disc;
   text-decoration: line-through;
@@ -69,4 +73,8 @@ header {
 
 #clearCompleted {
   visibility: hidden;
+}
+
+#deleteMarks {
+  visibility: visible;
 }

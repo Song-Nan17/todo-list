@@ -3,10 +3,11 @@
 
 
 
-let initializeDisplay=()=>{
+let initializeDisplay = () => {
   displayTodosOf('all');
   displayLeftItemsOfTodos('all');
   displayClearCompleted();
+  setButtonStatusTo('all');
 }
 
 let addTodoListener = () => {
@@ -24,7 +25,7 @@ let buttonAllListener = () => {
   displayLeftItemsOfTodos('all');
 }
 
-let buttonActiveListener=()=>{
+let buttonActiveListener = () => {
   setButtonStatusTo('active');
   changeButtonActiveColor();
   displayTodosOf('active');
@@ -33,6 +34,26 @@ let buttonActiveListener=()=>{
 let buttonCompleteListener = () => {
   setButtonStatusTo('completed');
   changeButtonCompletedColor();
+  deleteNewTodosId();
   displayTodosOf('completed');
   displayLeftItemsOfTodos('completed');
+}
+
+let clearCompletedListener = () => {
+  clearCompletedTodos();
+  displayClearCompleted();
+}
+
+let completeTodoListener = event => {
+  completeClickedTodo(event);
+  refreshTodosDisplay();
+  displayClearCompleted();
+
+}
+
+let deleteTodoListener = event => {
+  let idOfDeletedTodo = event.target.id;
+  deletedTodo(idOfDeletedTodo);
+  refreshTodosDisplay();
+
 }
