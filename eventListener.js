@@ -1,8 +1,5 @@
 // localStorage.clear();
 
-
-
-
 let initializeDisplay = () => {
   displayTodosOf('all');
   displayLeftItemsOfTodos('all');
@@ -55,5 +52,4 @@ let deleteTodoListener = event => {
   let idOfDeletedTodo = event.target.id;
   deletedTodo(idOfDeletedTodo);
   refreshTodosDisplay();
-
 }

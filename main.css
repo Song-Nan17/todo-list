@@ -41,6 +41,9 @@ header {
 #todoList li:hover span {
 visibility: visible;
 }
+#todoList li:hover {
+  border-bottom:solid 1px rgb(131, 110, 110);
+}
 
 #todoList .completed {
   list-style-type: disc;
