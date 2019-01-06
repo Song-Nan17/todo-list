@@ -4,16 +4,21 @@ let addTodoListener = () => {
   let todo = generateNewTodo();
   addTodo(todo);
   clearInputBox();
-}
-
-let buttonCompleteListener = () => {
-  setStatus();
-  changeButtonCompletedColor();
-  displayCompletedTodos()
-  return 1;
+  refreshTodos();
 }
 
 let buttonAllListener = () => {
-  deleteStatus();
+  setButtonStatusToAll();
   changeButtonAllColor();
+  displayAllTodos();
+}
+
+let buttonActiveListener=()=>{
+  displayActiveTodos()
+}
+let buttonCompleteListener = () => {
+  setButtonStatusToCompleted();
+  changeButtonCompletedColor();
+  displayCompletedTodos()
+  return 1;
 }

@@ -4,9 +4,9 @@ let generateNewTodo = () => {
   if (!content.length) {
     return;
   }
-  let status = getStatus();
-  if (!status) {
-    status = 'active';
+  let status = 'active';
+  if (getButtonStatus() === 'completed') {
+    status = 'completed';
   }
   let id = new Date();
   return new Todo(content, status, id);
@@ -17,19 +17,27 @@ let addTodo = todo => {
     return;
   }
   let todos = getTodos();
-  todos = JSON.parse(todos);
   if (!todos) {
     todos = [];
   }
   todos.push(todo);
-  todos = JSON.stringify(todos);
   setTodos(todos);
 }
-
-let changeButtonCompletedColor = () => {
-  document.getElementById('completed').style.background = 'pink';
-  document.getElementById('all').style.background = '';
-  document.getElementById('active').style.background = '';
+let refreshTodos = () => {
+  let ButtonStatus = getButtonStatus();
+  switch(ButtonStatus) {
+    case 'all':
+    displayAllTodos();
+    break;
+    case 'actice':
+    displayActiveTodos();
+    break;
+    case 'completed':
+    displayCompletedTodos();
+    break;
+    default:
+    displayAllTodos();
+  }
 }
 
 let changeButtonAllColor = () => {
@@ -38,4 +46,24 @@ let changeButtonAllColor = () => {
   document.getElementById('active').style.background = '';
 }
 
-// let displayCompletedTodos = () =>
+let displayAllTodos=()=>{
+  return;
+}
+
+let displayActiveTodos=()=>{
+  return;
+}
+
+let changeButtonCompletedColor = () => {
+  document.getElementById('completed').style.background = 'pink';
+  document.getElementById('all').style.background = '';
+  document.getElementById('active').style.background = '';
+}
+
+
+let displayCompletedTodos = () => {
+  let todos = getTodos();
+  let completedTodos = getCompletedTodos(todos);
+  let liTags = getLiTags(completedTodos);
+  document.getElementById('todoList').innerHTML = liTags.join('\n');
+}
