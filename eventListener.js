@@ -5,9 +5,8 @@
 
 let initializeDisplay=()=>{
   displayTodosOf('all');
-
   displayLeftItemsOfTodos('all');
-
+  displayClearCompleted();
 }
 
 let addTodoListener = () => {
@@ -15,6 +14,7 @@ let addTodoListener = () => {
   addTodo(todo);
   clearInputBox();
   refreshTodosDisplay();
+  displayClearCompleted();
 }
 
 let buttonAllListener = () => {

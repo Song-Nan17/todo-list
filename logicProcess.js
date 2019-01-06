@@ -118,5 +118,15 @@ let noDisplayNewAddTodo = () => {
   }
   let displayTodos = completedTodos.slice(0, completedTodos.length - 1);
   displayLiTags(displayTodos);
+}
 
+let displayClearCompleted = () => {
+  let todos = getTodos();
+  if (!todos) {
+    return;
+  }
+  let completedTodos = getTodosIsClass('completed', todos);
+  if (completedTodos.length > 1) {
+    document.getElementById('clearCompleted').style.visibility = 'visible';
+  }
 }
