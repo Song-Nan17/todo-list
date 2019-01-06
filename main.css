@@ -34,6 +34,16 @@ header {
   padding: 3px 5px;
 }
 
+#todoList {
+  list-style-type: circle;
+}
+
+#todoList .completed {
+  list-style-type: disc;
+  text-decoration: line-through;
+  color: gray;
+}
+
 #main li {
   width: 90%;
 }

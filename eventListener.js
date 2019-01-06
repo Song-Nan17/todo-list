@@ -8,17 +8,21 @@ let addTodoListener = () => {
 }
 
 let buttonAllListener = () => {
-  setButtonStatusToAll();
+  setButtonStatusTo('all');
   changeButtonAllColor();
   displayAllTodos();
+  displayLeftItemsOfTodos('all');
 }
 
 let buttonActiveListener=()=>{
-  displayActiveTodos()
+  setButtonStatusTo('active');
+  changeButtonActiveColor();
+  displayActiveTodos();
+  displayLeftItemsOfTodos('active')
 }
 let buttonCompleteListener = () => {
-  setButtonStatusToCompleted();
+  setButtonStatusTo('completed');
   changeButtonCompletedColor();
-  displayCompletedTodos()
-  return 1;
+  displayCompletedTodos();
+  displayLeftItemsOfTodos('completed');
 }

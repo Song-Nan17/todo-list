@@ -25,18 +25,16 @@ let addTodo = todo => {
 }
 let refreshTodos = () => {
   let ButtonStatus = getButtonStatus();
-  switch(ButtonStatus) {
+  switch (ButtonStatus) {
     case 'all':
-    displayAllTodos();
-    break;
+      displayAllTodos();
+      break;
     case 'actice':
-    displayActiveTodos();
-    break;
+      displayActiveTodos();
+      break;
     case 'completed':
-    displayCompletedTodos();
-    break;
-    default:
-    displayAllTodos();
+      displayCompletedTodos();
+      break;
   }
 }
 
@@ -46,12 +44,20 @@ let changeButtonAllColor = () => {
   document.getElementById('active').style.background = '';
 }
 
-let displayAllTodos=()=>{
-  return;
+let displayAllTodos = () => {
+  let todos = getTodos();
+  displayLiTags(todos);
 }
 
-let displayActiveTodos=()=>{
-  return;
+let changeButtonActiveColor = () => {
+  document.getElementById('completed').style.background = '';
+  document.getElementById('all').style.background = '';
+  document.getElementById('active').style.background = 'pink';
+}
+
+let displayActiveTodos = () => {
+  let activeTodos = getTodosIsClass('active');
+  displayLiTags(activeTodos);
 }
 
 let changeButtonCompletedColor = () => {
@@ -62,8 +68,11 @@ let changeButtonCompletedColor = () => {
 
 
 let displayCompletedTodos = () => {
-  let todos = getTodos();
-  let completedTodos = getCompletedTodos(todos);
-  let liTags = getLiTags(completedTodos);
+  let completedTodos = getTodosIsClass('completed');
+  displayLiTags(completedTodos);
+}
+
+let displayLiTags = (todos) => {
+  let liTags = getLiTags(todos);
   document.getElementById('todoList').innerHTML = liTags.join('\n');
 }

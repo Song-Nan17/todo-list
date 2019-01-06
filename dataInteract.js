@@ -13,13 +13,12 @@ let clearInputBox = () => {
 }
 
 let getButtonStatus = () => localStorage.getItem('buttonStatus');
-let setButtonStatusToCompleted = () => localStorage.setItem('buttonStatus', 'completed');
+let setButtonStatusTo = (status) => localStorage.setItem('buttonStatus', status);
 
-let setButtonStatusToAll = () => localStorage.setItem('buttonStatus', 'all');
 
-let getCompletedTodos = todos => {
-  let completedTodos=todos.filter(todo => todo.status === 'completed');
-  return completedTodos; 
+let getTodosIsClass = status => {
+  let todos = getTodos();
+  return todos.filter(todo => todo.status === status);; 
 }
 let getLiTags = completedTodos => completedTodos.map(todo =>
   `<li class ="${todo.status}">${todo.content}<span>x</span></li>`);
