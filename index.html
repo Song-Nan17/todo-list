@@ -13,31 +13,19 @@
   <script type="text/javascript" src="todo.js"></script>
 </head>
 
-<body onload="initializeDisplay()">
+<body onload="onloadPageListener()">
   <div id="total">
     <header>Todo List</header>
     <div id="addTodo">
-      <input type="text" id="inputBox" placeholder="请输入" />
+      <input type="text" id="inputBox" placeholder="请输入" onkeypress="if(event.keyCode==13) {addTodoListener()}"/>
       <button type="submit" onclick="addTodoListener()">添加</button>
     </div>
     <div id="main">
-      <!-- <table id="todo_table">
-        <tbody> -->
       <ul id="todoList" onclick="completeTodoListener(event)">
-        <!-- <li>123<span>x</span></li>
-        <li>456<span>x</span></li>
-        <li>789<span>x</span></li>
-        <li>789<span>x</span></li>
-        <li>789<span>x</span></li>
-        <li>789<span>x</span></li>
-        <li>789<span>x</span></li>
-        <li>789<span>x</span></li> -->
       </ul>
-      <!-- </tbody>
-      </table> -->
     </div>
     <div id="footButtons">
-      <span id="leftItems">left</span>
+      <span id="leftItems"></span>
       <input type="button" id="all" value="ALL" onclick="buttonAllListener()">
       <input type="button" id="active" value="ACTIVE" onclick="buttonActiveListener()">
       <input type="button" id="completed" value="COMPLETE" onclick="buttonCompleteListener()">

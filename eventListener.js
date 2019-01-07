@@ -1,55 +1,46 @@
 // localStorage.clear();
 
-let initializeDisplay = () => {
-  displayTodosOf('all');
-  displayLeftItemsOfTodos('all');
-  displayClearCompleted();
+let onloadPageListener = () => {
   setButtonStatusTo('all');
+  deleteNewTodoIdsInLS();
+  refreshDisplay();
 }
 
 let addTodoListener = () => {
-  let todo = generateNewTodo();
-  addTodo(todo);
-  clearInputBox();
-  refreshTodosDisplay();
-  displayClearCompleted();
+  addNewTodo();
+  refreshDisplay();
 }
 
 let buttonAllListener = () => {
   setButtonStatusTo('all');
-  changeButtonAllColor();
-  displayTodosOf('all');
-  displayLeftItemsOfTodos('all');
+  deleteNewTodoIdsInLS();
+  refreshDisplay('all');
 }
 
 let buttonActiveListener = () => {
   setButtonStatusTo('active');
-  changeButtonActiveColor();
-  displayTodosOf('active');
-  displayLeftItemsOfTodos('active')
+  deleteNewTodoIdsInLS();
+  refreshDisplay('active');
+
 }
 let buttonCompleteListener = () => {
   setButtonStatusTo('completed');
-  changeButtonCompletedColor();
-  deleteNewTodosId();
-  displayTodosOf('completed');
-  displayLeftItemsOfTodos('completed');
+  deleteNewTodoIdsInLS();
+  refreshDisplay('completed');
 }
 
 let clearCompletedListener = () => {
   clearCompletedTodos();
-  displayClearCompleted();
+  refreshDisplay();
 }
 
 let completeTodoListener = event => {
   completeClickedTodo(event);
-  refreshTodosDisplay();
-  displayClearCompleted();
-
+  refreshDisplay();
 }
 
 let deleteTodoListener = event => {
-  let idOfDeletedTodo = event.target.id;
-  deletedTodo(idOfDeletedTodo);
-  refreshTodosDisplay();
+  let cilckedTodoId = event.target.id;
+  deletedTodo(cilckedTodoId);
+  refreshDisplay()
 }
