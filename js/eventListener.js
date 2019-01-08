@@ -1,8 +1,7 @@
 // localStorage.clear();
 
 let onloadPageListener = () => {
-  setButtonStatusTo('all');
-  deleteNewTodoIdsInLS();
+  processSomeDataInLS('all');
   refreshDisplay();
 }
 
@@ -12,20 +11,17 @@ let addTodoListener = () => {
 }
 
 let buttonAllListener = () => {
-  setButtonStatusTo('all');
-  deleteNewTodoIdsInLS();
+  processSomeDataInLS('all');
   refreshDisplay('all');
 }
 
 let buttonActiveListener = () => {
-  setButtonStatusTo('active');
-  deleteNewTodoIdsInLS();
+  processSomeDataInLS('active');
   refreshDisplay('active');
 
 }
 let buttonCompleteListener = () => {
-  setButtonStatusTo('completed');
-  deleteNewTodoIdsInLS();
+  processSomeDataInLS('completed');
   refreshDisplay('completed');
 }
 
@@ -40,7 +36,6 @@ let completeTodoListener = event => {
 }
 
 let deleteTodoListener = event => {
-  let cilckedTodoId = event.target.id;
-  deletedTodo(cilckedTodoId);
+  deletedTodo(event.target.id)
   refreshDisplay()
 }
