@@ -1,7 +1,5 @@
 let setButtonStatusTo = status => localStorage.setItem('buttonStatus', status);
 
-let deleteNewTodoIdsInLS = () => localStorage.removeItem('newTodoIds');
-
 let getStrFromLocalStorage = stringName => localStorage.getItem(stringName);
 
 let getArrFromLocalStorage = arrName => {
