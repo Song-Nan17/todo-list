@@ -2,9 +2,12 @@ let setButtonStatusTo = status => localStorage.setItem('buttonStatus', status);
 
 let getStrFromLocalStorage = stringName => localStorage.getItem(stringName);
 
-let getArrFromLocalStorage = arrName => {
-  let arr = localStorage.getItem(arrName);
-  return JSON.parse(arr);
+let getTodosFromStorage = () => {
+  let todos = localStorage.getItem('todos');
+  if(!todos) {
+    return [];
+  }
+  return JSON.parse(todos);
 }
 
 let setTodos = todos => {

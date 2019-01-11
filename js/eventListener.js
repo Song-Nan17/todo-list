@@ -1,4 +1,3 @@
-// localStorage.clear();
 
 let onloadPageListener = () => {
   processSomeDataInLS('all');
@@ -12,13 +11,13 @@ let addTodoListener = () => {
 
 let buttonAllListener = () => {
   processSomeDataInLS('all');
+  alert();
   refreshDisplay('all');
 }
 
 let buttonActiveListener = () => {
   processSomeDataInLS('active');
   refreshDisplay('active');
-
 }
 let buttonCompleteListener = () => {
   processSomeDataInLS('completed');

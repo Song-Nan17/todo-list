@@ -1,6 +1,5 @@
 let processSomeDataInLS = status => {
   setButtonStatusTo(status);
-  // deleteNewTodoIdsInLS();
 }
 
 let refreshDisplay = buttonId => {
@@ -15,43 +14,36 @@ let refreshDisplay = buttonId => {
 }
 
 let displayTodos = status => {
-  let todos = getArrFromLocalStorage('todos');
-  if (!todos) {
-    return;
-  }
-  let displayTodos = todos;
+  let displayTodos = getTodosFromStorage();
   if(status!=='all') {
-    displayTodos = getTodosIsClass(status,todos);
+    displayTodos = getTodosIsClass(status);
   }
   displayLiTags(displayTodos);
 }
 
-let getTodosIsClass = (status, todos) => {
+let getTodosIsClass = (status) => {
+  const todos = getTodosFromStorage();
+  if(!todos) {
+    return [];
+  }
   return todos.filter(todo => todo.status === status);
 }
 
 
 let displayLiTags = todos => {
-  let liTags = todos.map(todo =>
+  const liTags = todos.map(todo =>
     `<li class ="${todo.status}">${todo.content}<span id="${todo.id}" onclick="deleteTodoListener(event)">x</span></li>`);
   document.getElementById('todoList').innerHTML = liTags.join('\n');
 }
 
 let displayLeftItems = () => {
-  let todos = getArrFromLocalStorage('todos');
-  let leftItems = 0;
-  if(!todos) {
-    return;
-  }
-  let activeTodos = getTodosIsClass('active',todos);
-  if(activeTodos.length){
-    leftItems=activeTodos.length;
-  }
+  let activeTodos = getTodosIsClass('active');
+  let leftItems=activeTodos.length;
   document.getElementById('leftItems').innerHTML = `Left items:${leftItems}`;
 }
 
 let displayClearCompleted = () => {
-  let todos = getArrFromLocalStorage('todos');
+  let todos = getTodosFromStorage();
   if (todos) {
     let completedTodos = getTodosIsClass('completed', todos);
     if (completedTodos.length > 1) {
@@ -92,7 +84,7 @@ let addTodo = todo => {
   if (!todo) {
     return;
   }
-  let todos = getArrFromLocalStorage('todos');
+  let todos = getTodosFromStorage();
   if (!todos) {
     todos = [];
   }
@@ -101,7 +93,7 @@ let addTodo = todo => {
 }
 
 let clearCompletedTodos = () => {
-  let todos = getArrFromLocalStorage('todos');
+  let todos = getTodosFromStorage();
   todos = todos.filter(todo => todo.status !== 'completed');
   setTodos(todos);
 }
@@ -114,7 +106,7 @@ let completeClickedTodo = event => {
 }
 
 let changeClickTodoStatus = (clickedTodoId, status) => {
-  let todos = getArrFromLocalStorage('todos');
+  let todos = getTodosFromStorage();
   todos.map(todo => {
     if (todo.id === clickedTodoId) {
       todo.status = status;
@@ -125,7 +117,7 @@ let changeClickTodoStatus = (clickedTodoId, status) => {
 }
 
 let deletedTodo = cilckedTodoId => {
-  let todos = getArrFromLocalStorage('todos');
+  let todos = getTodosFromStorage();
   let unclickedTodos = todos.filter(todo => todo.id !== cilckedTodoId);
   setTodos(unclickedTodos);
 }
