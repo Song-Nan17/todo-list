@@ -18,5 +18,3 @@ let setNewAddTodoIds = newTodoIds => {
   newTodoIds = JSON.stringify(newTodoIds);
   localStorage.setItem('newTodoIds', newTodoIds);
 }
-
-let setLeftItems = leftItems => localStorage.setItem('leftItems', leftItems);

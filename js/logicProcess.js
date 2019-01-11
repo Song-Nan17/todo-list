@@ -5,8 +5,8 @@ let processSomeDataInLS = status => {
 
 let refreshDisplay = buttonId => {
   let status = getStrFromLocalStorage('buttonStatus');
-  toDisplayTodos(status)
-  displayLeftItemsOfTodos(status);
+  displayTodos(status)
+  displayLeftItemsOfTodos();
   displayClearCompleted();
   clearInputBox();
   if (buttonId) {
@@ -14,17 +14,14 @@ let refreshDisplay = buttonId => {
   }
 }
 
-let toDisplayTodos = status => {
+let displayTodos = status => {
   let todos = getArrFromLocalStorage('todos');
   if (!todos) {
     return;
   }
   let displayTodos = todos;
-  if (status === 'active') {
-    displayTodos = getTodosIsClass('active', todos);
-  } else if (status === 'completed') {
-    let completedTodos = getTodosIsClass('completed', todos);
-    displayTodos = noDisplayNewAddTodo(completedTodos);
+  if(status!=='all') {
+    displayTodos = getTodosIsClass(status,todos);
   }
   displayLiTags(displayTodos);
 }
@@ -47,17 +44,17 @@ let displayLiTags = todos => {
   document.getElementById('todoList').innerHTML = liTags.join('\n');
 }
 
-let displayLeftItemsOfTodos = status => {
+let displayLeftItemsOfTodos = () => {
   let todos = getArrFromLocalStorage('todos');
-  if (status !== 'all' && todos) {
-    todos = getTodosIsClass(status, todos);
-  }
   let leftItems = 0;
-  if (todos) {
-    leftItems = todos.length;
+  if(!todos) {
+    return;
   }
-  document.getElementById('leftItems').innerHTML = `Left items:${leftItems}`
-  setLeftItems(leftItems);
+  let activeTodos = getTodosIsClass('active',todos);
+  if(activeTodos.length){
+    leftItems=activeTodos.length;
+  }
+  document.getElementById('leftItems').innerHTML = `Left items:${leftItems}`;
 }
 
 let displayClearCompleted = () => {
@@ -95,10 +92,6 @@ let generateNewTodo = () => {
   }
   let status = 'active';
   let id = new Date();
-  if (getStrFromLocalStorage('buttonStatus') === 'completed') {
-    status = 'completed';
-    refreshNewAddTodoIds(id);
-  }
   return new Todo(content, status, id);
 }
 
