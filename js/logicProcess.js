@@ -3,7 +3,7 @@ let processSomeDataInLS = status => {
 }
 
 let refreshDisplay = buttonId => {
-  let status = getStrFromLocalStorage('buttonStatus');
+  const status = getStrFromLocalStorage('buttonStatus');
   displayTodos(status)
   displayLeftItems();
   displayClearCompleted();
@@ -19,6 +19,7 @@ let displayTodos = status => {
     displayTodos = getTodosIsClass(status);
   }
   displayLiTags(displayTodos);
+  changeCheckBox();
 }
 
 let getTodosIsClass = (status) => {
@@ -32,20 +33,26 @@ let getTodosIsClass = (status) => {
 
 let displayLiTags = todos => {
   const liTags = todos.map(todo =>
-    `<li class ="${todo.status}">${todo.content}<span id="${todo.id}" onclick="deleteTodoListener(event)">x</span></li>`);
+    `<li class ="${todo.status}"  id="${todo.id}"><input type = "checkBox"><p>${todo.content}</p><span onclick="deleteTodoListener(event)">-</span></li>`);
   document.getElementById('todoList').innerHTML = liTags.join('\n');
 }
 
+let changeCheckBox =()=> {
+  const completedLis = document.getElementsByClassName('completed');
+  for (let i = 0;i<completedLis.length;i++) {
+    completedLis[i].childNodes[0].checked='true';
+}
+}
 let displayLeftItems = () => {
-  let activeTodos = getTodosIsClass('active');
-  let leftItems=activeTodos.length;
+  const activeTodos = getTodosIsClass('active');
+  const leftItems=activeTodos.length;
   document.getElementById('leftItems').innerHTML = `Left items:${leftItems}`;
 }
 
 let displayClearCompleted = () => {
-  let todos = getTodosFromStorage();
+  const todos = getTodosFromStorage();
   if (todos) {
-    let completedTodos = getTodosIsClass('completed', todos);
+    const completedTodos = getTodosIsClass('completed', todos);
     if (completedTodos.length > 1) {
       document.getElementById('clearCompleted').style.visibility = 'visible';
     } else {
@@ -58,25 +65,29 @@ let displayClearCompleted = () => {
 let clearInputBox = () => document.getElementById('inputBox').value = '';
 
 let changeButtonsColor = buttonId => {
-  let buttons = document.getElementsByTagName('input');
+  const buttons = document.getElementsByTagName('input');
   for (i = 0; i < buttons.length; i++) {
     buttons[i].style.background = '';
+    buttons[i].style['border-color'] = '';
+    buttons[i].style.color = '';
   }
-  document.getElementById(buttonId).style.background = 'pink';
+  document.getElementById(buttonId).style.background ='rgb(24, 23, 23)';
+  document.getElementById(buttonId).style['border-color'] ='rgb(24, 23, 23)';
+  document.getElementById(buttonId).style.color ='#DDD';
 }
 
 let addNewTodo = () => {
-  let todo = generateNewTodo();
+  const todo = generateNewTodo();
   addTodo(todo);
 }
 
 let generateNewTodo = () => {
-  let content = document.getElementById('inputBox').value;
+  const content = document.getElementById('inputBox').value;
   if (!content.length) {
     return;
   }
-  let status = 'active';
-  let id = new Date();
+  const status = 'active';
+  const id = new Date();
   return new Todo(content, status, id);
 }
 
@@ -99,8 +110,8 @@ let clearCompletedTodos = () => {
 }
 
 let completeClickedTodo = event => {
-  if (event.target.tagName.toLowerCase() === 'li') {
-    let clickedTodoId = event.target.childNodes[1].id;
+  if (event.target.tagName.toLowerCase() === 'p'||'input') {
+    const clickedTodoId = event.target.parentNode.id;
     changeClickTodoStatus(clickedTodoId, 'completed');
   }
 }
@@ -116,8 +127,9 @@ let changeClickTodoStatus = (clickedTodoId, status) => {
   setTodos(todos);
 }
 
-let deletedTodo = cilckedTodoId => {
-  let todos = getTodosFromStorage();
-  let unclickedTodos = todos.filter(todo => todo.id !== cilckedTodoId);
+let deletedTodo = event => {
+  const todos = getTodosFromStorage();
+  const clickedTodoId = event.target.parentNode.id;
+  const unclickedTodos = todos.filter(todo => todo.id !== clickedTodoId);
   setTodos(unclickedTodos);
 }

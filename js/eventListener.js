@@ -11,7 +11,6 @@ let addTodoListener = () => {
 
 let buttonAllListener = () => {
   processSomeDataInLS('all');
-  alert();
   refreshDisplay('all');
 }
 
@@ -35,6 +34,6 @@ let completeTodoListener = event => {
 }
 
 let deleteTodoListener = event => {
-  deletedTodo(event.target.id)
+  deletedTodo(event)
   refreshDisplay()
 }
